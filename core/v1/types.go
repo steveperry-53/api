@@ -294,7 +294,7 @@ type VolumeSource struct {
 	Glusterfs *GlusterfsVolumeSource `json:"glusterfs,omitempty" protobuf:"bytes,9,opt,name=glusterfs"`
 	// PersistentVolumeClaimVolumeSource represents a reference to a
 	// PersistentVolumeClaim in the same namespace.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims
 	// +optional
 	PersistentVolumeClaim *PersistentVolumeClaimVolumeSource `json:"persistentVolumeClaim,omitempty" protobuf:"bytes,10,opt,name=persistentVolumeClaim"`
 	// RBD represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -358,7 +358,7 @@ type VolumeSource struct {
 // type of volume that is owned by someone else (the system).
 type PersistentVolumeClaimVolumeSource struct {
 	// ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims
 	ClaimName string `json:"claimName" protobuf:"bytes,1,opt,name=claimName"`
 	// Will force the ReadOnly setting in VolumeMounts.
 	// Default false.
@@ -469,7 +469,7 @@ const (
 
 // PersistentVolume (PV) is a storage resource provisioned by an administrator.
 // It is analogous to a node.
-// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
+// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 type PersistentVolume struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard object's metadata.
@@ -479,14 +479,14 @@ type PersistentVolume struct {
 
 	// Spec defines a specification of a persistent volume owned by the cluster.
 	// Provisioned by an administrator.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
 	// +optional
 	Spec PersistentVolumeSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status represents the current information/status for the persistent volume.
 	// Populated by the system.
 	// Read-only.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
 	// +optional
 	Status PersistentVolumeStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
@@ -494,25 +494,25 @@ type PersistentVolume struct {
 // PersistentVolumeSpec is the specification of a persistent volume.
 type PersistentVolumeSpec struct {
 	// A description of the persistent volume's resources and capacity.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity
 	// +optional
 	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,1,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
 	// The actual volume backing the persistent volume.
 	PersistentVolumeSource `json:",inline" protobuf:"bytes,2,opt,name=persistentVolumeSource"`
 	// AccessModes contains all ways the volume can be mounted.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes
 	// +optional
 	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,3,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
 	// ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim.
 	// Expected to be non-nil when bound.
 	// claim.VolumeName is the authoritative bind between PV and PVC.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#binding
 	// +optional
 	ClaimRef *ObjectReference `json:"claimRef,omitempty" protobuf:"bytes,4,opt,name=claimRef"`
 	// What happens to a persistent volume when released from its claim.
 	// Valid options are Retain (default) and Recycle.
 	// Recycling must be supported by the volume plugin underlying this persistent volume.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming
 	// +optional
 	PersistentVolumeReclaimPolicy PersistentVolumeReclaimPolicy `json:"persistentVolumeReclaimPolicy,omitempty" protobuf:"bytes,5,opt,name=persistentVolumeReclaimPolicy,casttype=PersistentVolumeReclaimPolicy"`
 	// Name of StorageClass to which this persistent volume belongs. Empty value
@@ -544,7 +544,7 @@ const (
 // PersistentVolumeStatus is the current status of a persistent volume.
 type PersistentVolumeStatus struct {
 	// Phase indicates if a volume is available, bound to a claim, or released by a claim.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#phase
 	// +optional
 	Phase PersistentVolumePhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PersistentVolumePhase"`
 	// A human-readable message indicating details about why the volume is in this state.
@@ -566,7 +566,7 @@ type PersistentVolumeList struct {
 	// +optional
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// List of persistent volumes.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 	Items []PersistentVolume `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
@@ -582,13 +582,13 @@ type PersistentVolumeClaim struct {
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec defines the desired characteristics of a volume requested by a pod author.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims
 	// +optional
 	Spec PersistentVolumeClaimSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status represents the current information/status of a persistent volume claim.
 	// Read-only.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims
 	// +optional
 	Status PersistentVolumeClaimStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
@@ -603,7 +603,7 @@ type PersistentVolumeClaimList struct {
 	// +optional
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	// A list of persistent volume claims.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims
 	Items []PersistentVolumeClaim `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
@@ -611,21 +611,21 @@ type PersistentVolumeClaimList struct {
 // and allows a Source for provider-specific attributes
 type PersistentVolumeClaimSpec struct {
 	// AccessModes contains the desired access modes the volume should have.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes-1
 	// +optional
 	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,1,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
 	// A label query over volumes to consider for binding.
 	// +optional
 	Selector *metav1.LabelSelector `json:"selector,omitempty" protobuf:"bytes,4,opt,name=selector"`
 	// Resources represents the minimum resources the volume should have.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#resources
 	// +optional
 	Resources ResourceRequirements `json:"resources,omitempty" protobuf:"bytes,2,opt,name=resources"`
 	// VolumeName is the binding reference to the PersistentVolume backing this claim.
 	// +optional
 	VolumeName string `json:"volumeName,omitempty" protobuf:"bytes,3,opt,name=volumeName"`
 	// Name of the StorageClass required by the claim.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class-1
 	// +optional
 	StorageClassName *string `json:"storageClassName,omitempty" protobuf:"bytes,5,opt,name=storageClassName"`
 }
@@ -664,7 +664,7 @@ type PersistentVolumeClaimStatus struct {
 	// +optional
 	Phase PersistentVolumeClaimPhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PersistentVolumeClaimPhase"`
 	// AccessModes contains the actual access modes the volume backing the PVC has.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes-1
 	// +optional
 	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,2,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
 	// Represents the actual resources of the underlying volume.
@@ -771,7 +771,7 @@ type EmptyDirVolumeSource struct {
 	// The maximum usage on memory medium EmptyDir would be the minimum value between
 	// the SizeLimit specified here and the sum of memory limits of all containers in a pod.
 	// The default is nil which means that the limit is undefined.
-	// More info: http://kubernetes.io/docs/user-guide/volumes#emptydir
+	// More info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
 	// +optional
 	SizeLimit *resource.Quantity `json:"sizeLimit,omitempty" protobuf:"bytes,2,opt,name=sizeLimit"`
 }
@@ -1886,7 +1886,7 @@ type Container struct {
 	// Cannot be updated.
 	Name string `json:"name" protobuf:"bytes,1,opt,name=name"`
 	// Docker image name.
-	// More info: https://kubernetes.io/docs/concepts/containers/images
+	// More info: https://kubernetes.io/docs/concepts/containers/images/
 	// This field is optional to allow higher level config management to default or override
 	// container images in workload controllers like Deployments and StatefulSets.
 	// +optional
@@ -1944,7 +1944,7 @@ type Container struct {
 	Env []EnvVar `json:"env,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,7,rep,name=env"`
 	// Compute Resources required by this container.
 	// Cannot be updated.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#resources
 	// +optional
 	Resources ResourceRequirements `json:"resources,omitempty" protobuf:"bytes,8,opt,name=resources"`
 	// Pod volumes to mount into the container's filesystem.
@@ -1991,7 +1991,7 @@ type Container struct {
 	// One of Always, Never, IfNotPresent.
 	// Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
 	// Cannot be updated.
-	// More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
+	// More info: https://kubernetes.io/docs/concepts/containers/images/#updating-images
 	// +optional
 	ImagePullPolicy PullPolicy `json:"imagePullPolicy,omitempty" protobuf:"bytes,14,opt,name=imagePullPolicy,casttype=PullPolicy"`
 	// Security options the pod should run with.
@@ -2147,7 +2147,7 @@ type ContainerStatus struct {
 	// garbage collection. This value will get capped at 5 by GC.
 	RestartCount int32 `json:"restartCount" protobuf:"varint,5,opt,name=restartCount"`
 	// The image the container is running.
-	// More info: https://kubernetes.io/docs/concepts/containers/images
+	// More info: https://kubernetes.io/docs/concepts/containers/images/
 	// TODO(dchen1107): Which image the container is running with?
 	Image string `json:"image" protobuf:"bytes,6,opt,name=image"`
 	// ImageID of the container's image.
@@ -2636,7 +2636,7 @@ type PodSpec struct {
 	// ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec.
 	// If specified, these secrets will be passed to individual puller implementations for them to use. For example,
 	// in the case of docker, only DockerConfig type secrets are honored.
-	// More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
+	// More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
 	// +optional
 	// +patchMergeKey=name
 	// +patchStrategy=merge
@@ -2906,7 +2906,7 @@ type ReplicationControllerSpec struct {
 	// Replicas is the number of desired replicas.
 	// This is a pointer to distinguish between explicit zero and unspecified.
 	// Defaults to 1.
-	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller
+	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
 	// +optional
 	Replicas *int32 `json:"replicas,omitempty" protobuf:"varint,1,opt,name=replicas"`
 
@@ -2932,7 +2932,7 @@ type ReplicationControllerSpec struct {
 
 	// Template is the object that describes the pod that will be created if
 	// insufficient replicas are detected. This takes precedence over a TemplateRef.
-	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
+	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#pod-template
 	// +optional
 	Template *PodTemplateSpec `json:"template,omitempty" protobuf:"bytes,3,opt,name=template"`
 }
@@ -2941,7 +2941,7 @@ type ReplicationControllerSpec struct {
 // controller.
 type ReplicationControllerStatus struct {
 	// Replicas is the most recently oberved number of replicas.
-	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller
+	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
 	Replicas int32 `json:"replicas" protobuf:"varint,1,opt,name=replicas"`
 
 	// The number of pods that have labels matching the labels of the pod template of the replication controller.
@@ -3034,7 +3034,7 @@ type ReplicationControllerList struct {
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// List of replication controllers.
-	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller
+	// More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/
 	Items []ReplicationController `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
@@ -3344,7 +3344,7 @@ type ServiceAccount struct {
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Secrets is the list of secrets allowed to be used by pods running using this ServiceAccount.
-	// More info: https://kubernetes.io/docs/concepts/configuration/secret
+	// More info: https://kubernetes.io/docs/concepts/configuration/secret/
 	// +optional
 	// +patchMergeKey=name
 	// +patchStrategy=merge
@@ -3570,7 +3570,7 @@ type NodeSystemInfo struct {
 // NodeStatus is information about the current status of a node.
 type NodeStatus struct {
 	// Capacity represents the total resources of a node.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity
 	// +optional
 	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,1,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
 	// Allocatable represents the resources of a node that are available for scheduling.
@@ -4616,7 +4616,7 @@ type SecretList struct {
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Items is a list of secret objects.
-	// More info: https://kubernetes.io/docs/concepts/configuration/secret
+	// More info: https://kubernetes.io/docs/concepts/configuration/secret/
 	Items []Secret `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
